@@ -18,13 +18,17 @@
         if (!storedName) {
           setUserName();
         } else {
-          heading.innerHTML = `Hello ${storedName}`;
+          heading.innerHTML = `Hello ${storedName}!`;
         }
       };
       function setUserName() {
         let userName = prompt("Please enter your name here.");
-        window.localStorage.setItem("name", userName);
-        heading.innerHTML = `Hello ${userName}`;
+        if (!userName) {
+          setUserName(); // if user do not enter anything ask again
+        } else {
+          window.localStorage.setItem("name", userName);
+          heading.innerHTML = `Hello ${userName}!`;
+        }
       }
     </script>
   </body>
