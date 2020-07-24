@@ -4,22 +4,60 @@
     <meta charset="utf-8" />
     <title>Welcome</title>
     <style>
+      :root {
+        --text-color: #666;
+        --button-color: #bbb;
+        --green: mediumseagreen;
+        --purple: slateblue;
+        --orange: coral; 
+        --yellow: #FFD100;
+      }
+      .white span {
+        background-color: white;
+      }
+      .white h1 {
+        color: white;
+      }
+      .white_btn {
+        border: 1px solid white;
+        color: white;
+      }
       body {
+        margin: 0;
         width: 100vw;
         height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        
+      }
+      hgroup {
+        text-align: left;
+      }
+      span {
+        background-color: var(--text-color);
+        font-size: .9rem;
+        padding: .1em .4em;
+        border-radius: 3px;
+        color: white;
+        position: relative;
+        top: -8px;
+        cursor: pointer;
       }
       h1 {
+        margin: 0;
         font-size: 5.4rem;
+        color: var(--text-color);
+        line-height: 1;
+        cursor: pointer;
       }
       button {
+        margin-top: 3rem;
         outline: none;
         background-color: transparent;
-        color: #bbb;
-        border: 1px solid #bbb;
+        color: var(--button-color);
+        border: 1px solid var(--button-color);
         border-radius: 2em;
         padding: 1em 1.6em;
         cursor: pointer;
@@ -29,23 +67,39 @@
         color: white;
         border: 1px solid transparent;
       }
+      @media (max-width: 480px) {
+        hgroup {
+          text-align: center;
+        }
+        span {
+          top: -26px;
+        }
+      }
     </style>
   </head>
   <body>
-    <h1>Hello</h1>
+    <hgroup>
+      <span>click to change color</span>
+      <h1>Hello</h1>
+    </hgroup>
     <button>Enter your name</button>
     <script>
+      const body = document.querySelector('body');
+      const hgroup = document.querySelector('hgroup');
+      const tag = document.querySelector('span');
       const heading = document.querySelector("h1");
       const btn = document.querySelector("button");
-      const storedName = window.localStorage.getItem("name");
+      let count = 0;
 
       window.onload = function () {
+        const storedName = window.localStorage.getItem("name");
         btn.addEventListener("click", setUserName);
         if (!storedName) {
           setUserName();
         } else {
           heading.innerHTML = `Hello ${storedName}!`;
         }
+        hgroup.addEventListener('click', changeColor);
       };
       function setUserName() {
         let userName = prompt("Please enter your name here.");
@@ -54,6 +108,31 @@
         } else {
           window.localStorage.setItem("name", userName);
           heading.innerHTML = `Hello ${userName}!`;
+        }
+      }
+      function changeColor() {
+        count++;
+        console.log(count);
+        if (count === 1) {
+          body.style.backgroundColor = 'var(--green)';
+          tag.style.color = 'var(--green)';
+          hgroup.classList.add('white');
+          btn.classList.add('white_btn');
+        } else if (count === 2) {
+          body.style.backgroundColor = 'var(--purple)';
+          tag.style.color = 'var(--purple)';
+        } else if (count === 3) {
+          body.style.backgroundColor = 'var(--orange)';
+          tag.style.color = 'var(--orange)';
+        } else if (count === 4) {
+          body.style.backgroundColor = 'var(--yellow)';
+          tag.style.color = 'var(--yellow)';
+        } else if (count === 5) {
+          body.style.backgroundColor = 'white';
+          tag.style.color = 'white';
+          hgroup.classList.remove('white');
+          btn.classList.remove('white_btn');
+          count = 0;
         }
       }
     </script>
