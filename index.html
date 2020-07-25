@@ -44,6 +44,13 @@
         position: relative;
         top: -8px;
         cursor: pointer;
+        animation: tagShake 1s 1s infinite;;
+      }
+      @keyframes tagShake {
+        0% { top: -9px;}
+        25% { top: -7px; }
+        75% { top: -9px; }
+        100% { top: -8px; }
       }
       h1 {
         margin: 0;
@@ -72,7 +79,14 @@
           text-align: center;
         }
         span {
-          top: -26px;
+          top: -32px;
+          animation: tagShakeM 1s 1s infinite;
+        }
+        @keyframes tagShakeM {
+          0% { top: -33px;}
+          25% { top: -32px; }
+          75% { top: -33px; }
+          100% { top: -32px; }
         }
       }
     </style>
