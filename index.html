@@ -9,8 +9,8 @@
         --button-color: #bbb;
         --green: mediumseagreen;
         --purple: slateblue;
-        --orange: coral; 
-        --yellow: #FFD100;
+        --orange: coral;
+        --yellow: #ffd100;
       }
       .white span {
         background-color: white;
@@ -30,27 +30,34 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        
       }
       hgroup {
         text-align: left;
       }
       span {
         background-color: var(--text-color);
-        font-size: .9rem;
-        padding: .1em .4em;
+        font-size: 0.9rem;
+        padding: 0.1em 0.4em;
         border-radius: 3px;
         color: white;
         position: relative;
         top: -8px;
         cursor: pointer;
-        animation: tagShake 1s 1s infinite;;
+        animation: tagShake 1s 1s infinite;
       }
       @keyframes tagShake {
-        0% { top: -9px;}
-        25% { top: -7px; }
-        75% { top: -9px; }
-        100% { top: -8px; }
+        0% {
+          top: -9px;
+        }
+        25% {
+          top: -7px;
+        }
+        75% {
+          top: -9px;
+        }
+        100% {
+          top: -8px;
+        }
       }
       h1 {
         margin: 0;
@@ -83,10 +90,18 @@
           animation: tagShakeM 1s 1s infinite;
         }
         @keyframes tagShakeM {
-          0% { top: -33px;}
-          25% { top: -32px; }
-          75% { top: -33px; }
-          100% { top: -32px; }
+          0% {
+            top: -33px;
+          }
+          25% {
+            top: -32px;
+          }
+          75% {
+            top: -33px;
+          }
+          100% {
+            top: -32px;
+          }
         }
       }
     </style>
@@ -103,7 +118,6 @@
       const tag = document.querySelector('span');
       const heading = document.querySelector("h1");
       const btn = document.querySelector("button");
-      let count = 0;
 
       window.onload = function () {
         const storedName = window.localStorage.getItem("name");
@@ -124,31 +138,43 @@
           heading.innerHTML = `Hello ${userName}!`;
         }
       }
+      function makeCounter() {
+        let count = 0;
+
+        function counter() {
+          count ++;
+          if (count === 5) {
+            count = 0;
+          }
+          return count;
+        }
+        return counter;
+      }
+      let colorSwitch = makeCounter();
       function changeColor() {
-        count++;
-        console.log(count);
-        if (count === 1) {
+        let colorNum = colorSwitch();
+        console.log(colorNum);
+        if (colorNum === 1) {
           body.style.backgroundColor = 'var(--green)';
           tag.style.color = 'var(--green)';
           hgroup.classList.add('white');
           btn.classList.add('white_btn');
-        } else if (count === 2) {
+        } else if (colorNum === 2) {
           body.style.backgroundColor = 'var(--purple)';
           tag.style.color = 'var(--purple)';
-        } else if (count === 3) {
+        } else if (colorNum === 3) {
           body.style.backgroundColor = 'var(--orange)';
           tag.style.color = 'var(--orange)';
-        } else if (count === 4) {
+        } else if (colorNum === 4) {
           body.style.backgroundColor = 'var(--yellow)';
           tag.style.color = 'var(--yellow)';
-        } else if (count === 5) {
+        } else if (colorNum === 0) {
           body.style.backgroundColor = 'white';
           tag.style.color = 'white';
           hgroup.classList.remove('white');
           btn.classList.remove('white_btn');
-          count = 0;
         }
-      }
+      };
     </script>
   </body>
 </html>
