@@ -113,62 +113,68 @@
     </hgroup>
     <button>Enter your name</button>
     <script>
-      const body = document.querySelector("body");
-      const hgroup = document.querySelector("hgroup");
-      const tag = document.querySelector("span");
-      const heading = document.querySelector("h1");
-      const btn = document.querySelector("button");
+      const body = document.querySelector('body');
+      const hgroup = document.querySelector('hgroup');
+      const tag = document.querySelector('span');
+      const heading = document.querySelector('h1');
+      const btn = document.querySelector('button');
 
       window.onload = function () {
-        const storedName = window.localStorage.getItem("name");
-        btn.addEventListener("click", setUserName);
+        const storedName = window.localStorage.getItem('name');
+        btn.addEventListener('click', setUserName);
         if (!storedName) {
           setUserName();
         } else {
           heading.innerHTML = `Hello ${storedName}!`;
         }
-        hgroup.addEventListener("click", function() {
+        hgroup.addEventListener('click', function () {
           myHeading.counter();
           changeColor();
           console.log(myHeading.count);
         });
       };
       function setUserName() {
-        let userName = prompt("Please enter your name here.");
+        let userName = prompt('Please enter your name here.');
         if (!userName) {
           setUserName(); // if user do not enter anything ask again
         } else {
-          window.localStorage.setItem("name", userName);
+          window.localStorage.setItem('name', userName);
           heading.innerHTML = `Hello ${userName}!`;
         }
       }
       let myHeading = {
         count: 0,
-        counter: function() {
+        counter: function () {
           this.count += 1;
         },
       };
       function changeColor() {
-        if (myHeading.count === 1) {
-          body.style.backgroundColor = "var(--green)";
-          tag.style.color = "var(--green)";
-          hgroup.classList.add("white");
-          btn.classList.add("white_btn");
-        } else if (myHeading.count === 2) {
-          body.style.backgroundColor = "var(--purple)";
-          tag.style.color = "var(--purple)";
-        } else if (myHeading.count === 3) {
-          body.style.backgroundColor = "var(--orange)";
-          tag.style.color = "var(--orange)";
-        } else if (myHeading.count === 4) {
-          body.style.backgroundColor = "var(--yellow)";
-          tag.style.color = "var(--yellow)";
-        } else if (myHeading.count === 5) {
-          body.style.backgroundColor = "white";
-          tag.style.color = "white";
-          hgroup.classList.remove("white");
-          btn.classList.remove("white_btn");
-          myHeading.count = 0;
+        switch (myHeading.count) {
+          case 1:
+            body.style.backgroundColor = 'var(--green)';
+            tag.style.color = 'var(--green)';
+            hgroup.classList.add('white');
+            btn.classList.add('white_btn');
+            break;
+          case 2:
+            body.style.backgroundColor = 'var(--purple)';
+            tag.style.color = 'var(--purple)';
+            break;
+          case 3:
+            body.style.backgroundColor = 'var(--orange)';
+            tag.style.color = 'var(--orange)';
+            break;
+          case 4:
+            body.style.backgroundColor = 'var(--yellow)';
+            tag.style.color = 'var(--yellow)';
+            break;
+          default:
+            body.style.backgroundColor = 'white';
+            tag.style.color = 'white';
+            hgroup.classList.remove('white');
+            btn.classList.remove('white_btn');
+            myHeading.count = 0;
+            break;
         }
       }
     </script>
